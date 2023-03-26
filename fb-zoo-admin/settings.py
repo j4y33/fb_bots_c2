@@ -1,10 +1,10 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = 'AKIASJB2CHM5NDLP57OQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'fbook-content'
+DEFAULT_FILE_STORAGE = '/'
+AWS_ACCESS_KEY_ID = '/'
+AWS_SECRET_ACCESS_KEY = '/'
+AWS_STORAGE_BUCKET_NAME = '/'
 AWS_DEFAULT_ACL = None
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cwb51zmori3v#j$m-5wctvq84-e4rm!0mbxk2_g^o1bcgmbai0'
+SECRET_KEY = '/'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
