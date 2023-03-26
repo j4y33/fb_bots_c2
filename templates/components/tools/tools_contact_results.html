@@ -1,0 +1,68 @@
+{% extends "components/tools/tools_contact.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+<!-- DataTables CSS -->
+<link href="{% static "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="{% static "bower_components/datatables-responsive/css/dataTables.responsive.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+        <div class="col-lg-10">
+            <label for="ulogin">bot id:</label>
+            <input type="text" id="ulogin" name="login" value="{{ login }}" readonly="readonly">
+        </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>EXTRACTED USER</th>
+                                <th>SOURCE</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}
+{% block extrajs %}
+
+<!-- DataTables JavaScript -->
+<script src="../../static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="../../static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+$(document).ready(function() {
+    $('#dataTables-example').DataTable({
+            responsive: true
+    });
+});
+</script>
+
+{% endblock extrajs %}

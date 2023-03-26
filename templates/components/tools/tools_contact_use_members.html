@@ -1,0 +1,167 @@
+{% extends "components/tools/tools_contact.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+    <form role="form" action='{% url 'dashboard:tools_contact_use_members' %}' method='POST'>
+        {% csrf_token %}
+        <div class="col-lg-10">
+            <label for="ulogin">bot id:</label>
+            <input type="text" id="ulogin" name="login" value="{{ login }}" readonly="readonly">
+            <div class="pull-right">
+                <input type="submit" value="UPDATE" class="btn btn-primary btn-lg">
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <br>
+        </div>
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    SEND FRIEND REQUEST
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg">
+                        <label>Wait between
+                            {{ form.wait_between }}
+                            and
+                            {{ form.wait_between_and }}
+                            seconds before each new operations
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                        <label>Execute between
+                            {{ form.execute_between }}
+                            and
+                            {{ form.execute_between_and }}
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.random_sleep_time }}add random sleep time
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.rotate_weekdays_randomly }}rotate weekdays randomly
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.ignore_existing_friends }}ignore my existing friends
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <label>
+                            {{ form.maximum_requests_per_login }}
+                            send a maxium of
+                            {{ form.maximum_requests_per_login_num }}
+                            friend request per login
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                        <div class="checkbox">
+                            <label>
+                                Operate on:
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.MON }}MON
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.TUE }}TUE
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.WED }}WED
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.THU }}THU
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.FRI }}FRI
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.SAT }}SAT
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.SUN }}SUN
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    SEND MESSAGE
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg">
+                        {{ form.message_text_area }}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">ignore my existing friends
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">ignore users who have already received an invite
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}

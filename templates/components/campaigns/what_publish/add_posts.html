@@ -1,0 +1,44 @@
+{% extends "components/campaigns/what_publish.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+<div class="col-lg-7">
+    <div class="pull-right">
+        <button type="button" onclick="location.href='{% url 'dashboard:campaigns_what_publish' %}'" class="btn btn-primary btn-lg">BACK
+        </button>
+    </div>
+ <form role="form" enctype="multipart/form-data" action='{% url 'dashboard:campaigns_what_publish_post' %}' method='POST'>
+     {% csrf_token %}
+     <div class="form-group">
+         {{ form.select }}
+         </br></br>
+         {{ form.post_text.label_tag }}
+         </br>
+         {{ form.post_text }}
+        <label for="campaign-content-upload">Attach Photo <span class="fa fa-photo"></span> or Video <span class="fa fa-film"></span>:</label>
+         <input id="campaign-content-upload" type="file" name="content" />
+     <br/>
+     <label>This post will be published by
+     {{ form.published_by }}
+     accounts before being removed from post list.</label>
+     <input type="submit" value="ADD TO POST LIST" class="btn btn-primary btn-lg"><br/><br/><br/>
+     <label>Add posts in Bulk:  </label><br/>
+     <button type="button" onclick="location.href='{% url 'dashboard:add_campaign' %}'" class="btn btn-primary btn-lg">IMPORT POSTS FROM .CSV(TODO)</button>
+     </div>
+ </form>
+</div>
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}

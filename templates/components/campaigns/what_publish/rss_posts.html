@@ -1,0 +1,109 @@
+{% extends "components/campaigns/what_publish.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="form-group">
+             {{ campaign.select }}
+        </div>
+        </br>
+        <label for="disabledSelect">Name:
+            <select id="ScrapOperation" class="form-control">
+                <option>RSS Operation Newspapers</option>
+            </select>
+        </label>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg">
+                    <label style="text-decoration: underline;">Feed Template:</label>
+                    <textarea class="form-control" rows="5">reuters.com/cyber/encryption.rss</textarea>
+                </div>
+                <div class="col-lg">
+                    <label style="text-decoration: underline;">Feed Template: (they are replaced by values from the feed)</label>
+                    <textarea class="form-control" rows="5">[TITLE] [DESCRIPTION] [URL] [IMAGE]</textarea>
+                </div>
+                <div class="col-lg">
+                    <form role="form">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">ignore items without images
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">send posts to post list as Drafts
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg">
+                    <div class="pull-right">
+                        <button type="button" onclick="location.href='{% url 'dashboard:add_campaign' %}'" class="btn btn-primary btn-lg">ADD FEED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                                <th>Campaign</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX">
+                                <td>RSS Operation Newspapers</td>
+                                <td>ACTIVE</td>
+                                <td class="center">
+                                    <button type="button" class="btn btn-outline btn-link">DELETE</button>|
+                                    <button type="button" class="btn btn-outline btn-link">STOP</button>|
+                                    <button type="button" class="btn btn-outline btn-link">PAUSE</button>
+                                </td>
+                                <td>First campaign</td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td>RSS Operation Blogs</td>
+                                <td>PENDING</td>
+                                <td class="center">
+                                    <button type="button" class="btn btn-outline btn-link">DELETE</button>|
+                                    <button type="button" class="btn btn-outline btn-link">START</button>
+                                </td>
+                                <td>Second campaign</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}

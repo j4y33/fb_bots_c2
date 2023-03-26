@@ -1,0 +1,40 @@
+{% extends "components/tools/tools_base.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav" id="campaigns-menu">
+                        <li>
+                            <a href="{% url 'dashboard:tools_contact_extract_members' %}?login={{ login }}"><i class="fa"></i> EXTRACT MEMBERS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:tools_contact_use_members' %}?login={{ login }}"><i class="fa"></i> USE MEMBERS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:tools_contact_results' %}?login={{ login }}"><i class="fa"></i> RESULTS</a>
+                        </li>
+                </ul>
+            </div>
+        </nav>
+     </div>
+</div>
+<!-- /.row -->
+<div id="publish-wrapper">
+    {% block publish %}
+    {% endblock publish %}
+</div>
+    <!-- /#campaigns-wrapper -->
+{% endblock content %}

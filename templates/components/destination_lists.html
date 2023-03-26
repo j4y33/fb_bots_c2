@@ -1,0 +1,98 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+
+<!-- DataTables CSS -->
+<link href="{% static "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="{% static "bower_components/datatables-responsive/css/dataTables.responsive.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Destination lists</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <button type="button" onclick="location.href='{% url 'dashboard:destination_lists_add' %}'" class="btn btn-primary btn-lg">ADD NEW DESTINATION
+            </button>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        </br>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th># Profiles</th>
+                                <th># Groups</th>
+                                <th># Walls/Profiles</th>
+                                <th># Campaigns</th>
+                                <th># Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for value in form %}
+                            <tr class="odd gradeX">
+                                <td>{{ value.dst_name }}</td>
+                                <td>{{value.profiles}}</td>
+                                <td>{{value.groups}}</td>
+                                <td>{{value.walls}}</td>
+                                <td>{{value.campaigns}}</td>
+                                <td class="center">
+                                    <form action='{% url 'dashboard:destination_lists' %}' method='POST'>
+                                        {% csrf_token %}
+                                        <input type="hidden" name="destination_list_name" value="{{ value.dst_name }}" />
+                                        <input type="submit" name="delete" value="DELETE" class="btn btn-outline btn-link">|
+                                        <input type="submit" name="clone" value="CLONE" class="btn btn-outline btn-link">
+                                    </form>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+{% endblock content %}
+
+
+{% block extrajs %}
+
+<!-- DataTables JavaScript -->
+<script src="../static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="../static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+$(document).ready(function() {
+    $('#dataTables-example').DataTable({
+            responsive: true
+    });
+});
+</script>
+
+{% endblock extrajs %}

@@ -1,0 +1,159 @@
+{% extends "components/campaigns.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block campaings %}
+
+<div class="row">
+    <div class="col-lg-10" align="center">
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-primary btn-lg">SHUFFLE ALL</button>
+            </div>
+            <div class="col-lg-3 offset-md-3">
+                <button type="button" class="btn btn-primary btn-lg">DELETE ALL</button>
+            </div>
+            <div class="col-lg-3 offset-md-6">
+                <button type="button" class="btn btn-primary btn-lg">ACTIVATE ALL POST</button>
+                <label>(set post status to publishing)</label>
+            </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>SELECT</th>
+                                <th>MESSAGE BODY</th>
+                                <th>STATUS</th>
+                                <th>SOURCE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX">
+                                <td class="center">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                    </label>
+                                </td>
+                                <td width="40%" class="center">
+                                    <div class="col-lg-9">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <div class="col-lg">
+                                                    <label>[TITLE]</label>
+                                                </div>
+                                                    Reuters Finds that...
+                                                <div class="col-lg">
+                                                    <label>[URL]</label>
+                                                </div>
+                                                    https://reuters.com/cybers...
+                                                <div class="col-lg">
+                                                    <label>[DESCRIPTION]</label>
+                                                </div>
+                                                    Millions of Americans face a cash cliff this summer as emergency benefits expire. The loss of that safety net looms in the weeks ahead, well before a sustained recovery is likely to take hold.
+                                                <div class="col-lg">
+                                                    <label>[IMAGE]</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td class="center">
+                                    Publishing
+                                </td>
+                                <td class="center">RSS Operations XY
+                                </td>
+                                <td class="center">
+                                    <div class="col-lg-3">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <div class="col-lg">
+                                                    <button type="button" class="btn btn-outline btn-link">PAUSE</button>
+                                                </div>
+                                                <div class="col-lg">
+                                                    <button type="button" class="btn btn-outline btn-link">EDIT</button>
+                                                </div>
+                                                <div class="col-lg">
+                                                    <button type="button" class="btn btn-outline btn-link">DELETE</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="odd gradeX">
+                                <td class="center">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                    </label>
+                                </td>
+                                <td width="40%" class="center">
+                                        <div class="col-lg-9">
+                                             <form role="form">
+                                                <div class="form-group">
+                                                    <div class="col-lg">
+                                                        <label>[TITLE]</label>
+                                                    </div>
+                                                        Reuters Finds that...
+                                                    <div class="col-lg">
+                                                        <label>[URL]</label>
+                                                    </div>
+                                                        https://reuters.com/cybers...
+                                                    <div class="col-lg">
+                                                        <label>[DESCRIPTION]</label>
+                                                    </div>
+                                                        Millions of Americans face a cash cliff this summer as emergency benefits expire. The loss of that safety net looms in the weeks ahead, well before a sustained recovery is likely to take hold.
+                                                    <div class="col-lg">
+                                                        <label>[IMAGE]</label>
+                                                    </div>
+                                                </div>
+                                             </form>
+                                        </div>
+                                </td>
+                                <td class="center">
+                                    Pending
+                                </td>
+                                <td class="center">Scrape Operation 1
+                                </td>
+                                <td class="center">
+                                    <div class="col-lg-3">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <div class="col-lg">
+                                                    <button type="button" class="btn btn-outline btn-link">PUBLISH NOW</button>
+                                                </div>
+                                                <div class="col-lg">
+                                                    <button type="button" class="btn btn-outline btn-link">EDIT</button>
+                                                </div>
+                                                <div class="col-lg">
+                                                    <button type="button" class="btn btn-outline btn-link">DELETE</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+<!-- /.row -->
+</div>
+{% endblock campaings %}

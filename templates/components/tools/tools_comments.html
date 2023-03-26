@@ -1,0 +1,40 @@
+{% extends "components/tools/tools_base.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav" id="campaigns-menu">
+                        <li>
+                            <a href="{% url 'dashboard:tools_comments_settings' %}?dst_id={{ dst_id }}"><i class="fa"></i> SETTINGS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:tools_comments_sources' %}?dst_id={{ dst_id }}"><i class="fa"></i> SOURCES</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:tools_comments_results' %}?dst_id={{ dst_id }}"><i class="fa"></i> RESULTS</a>
+                        </li>
+                </ul>
+            </div>
+        </nav>
+     </div>
+</div>
+<!-- /.row -->
+<div id="publish-wrapper">
+    {% block publish %}
+    {% endblock publish %}
+</div>
+    <!-- /#campaigns-wrapper -->
+{% endblock content %}

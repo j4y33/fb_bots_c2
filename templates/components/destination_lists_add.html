@@ -1,0 +1,246 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+
+<!-- DataTables CSS -->
+<link href="{% static "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="{% static "bower_components/datatables-responsive/css/dataTables.responsive.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block content %}
+<div class="row">
+    <form name='submit_dst' action='{% url 'dashboard:destination_lists_add' %}' method='POST'>
+    {% csrf_token %}
+    <div class="col-lg-12">
+        <div class="pull-left">
+            <button type="button" onclick="location.href='{% url 'dashboard:destination_lists' %}'" class="btn btn-primary btn-lg">BACK
+            </button>
+        </div>
+        <div class="pull-right">
+            <input type="submit" value="CONFIRM DESTINATION" class="btn btn-primary btn-lg">
+        </div>
+    </div>
+    <div class="col-lg-12">
+        </br>
+    </div>
+    <div class="col-lg-12">
+        <div class="pull-left">
+            {{ form.dst_name.label }}
+            </br>
+            {{ form.dst_name }}
+            <input name="total_id" type="hidden" value=''>
+            <input name="total_walls" type="hidden" value=''>
+            <input name="total_comments" type="hidden" value=''>
+        </div>
+        <div class="pull-left">
+        </br>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-12">
+        </br>
+    </div>
+    <!-- /.col-lg-12 -->
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="groupTable">
+                        <thead>
+                            <tr>
+                                <th>Selected</th>
+                                <th>Account</th>
+                                <th>VPN</th>
+                                <th>Region</th>
+                                <th>Tools groups</th>
+                                <th>Tags</th>
+                                <th>Friends</th>
+                                <th>Groups</th>
+                                <th>Pages</th>
+                                <th>Wall</th>
+                                <th>Comments/likes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for value in all_bots %}
+                            <tr>
+                                <td><input name="select" type="checkbox" value={{value.login}}></td>
+                                <td>{{value.login}}</td>
+                                <td>{{value.vpn}}</td>
+                                <td>{{value.region}}</td>
+                                <td>{% for group in value.bot_dst_groups %}
+                                    <a href="/tools/">{{ group }}</a>
+                                    {% endfor %}</td>
+                                <td># Tags</td>
+                                <td>{{value.friends}}</td>
+                                <td>
+                                    <button name="check" type="button" data-id="{{value.login}}" class="open-AddGroupsDialog btn btn-outline btn-link" data-toggle="modal" data-target="#groupsModal">
+                                        {{value.groups_length}}</button>
+                                </td>
+                                <td>None</td>
+                                <td><input name="wall" type="checkbox" value={{value.login}} checked></td>
+                                <td><input name="comment" type="checkbox" value={{value.login}} checked></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    </form>
+    <!-- /.col-lg-12 -->
+    <!-- Modal -->
+
+    <div class="modal fade" id="groupsModal" tabindex="-1" role="dialog" aria-labelledby="groupsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title" id="groupsModalLabel">
+                        <input type="text" name="botId" id="botId" value="" readonly="readonly"/>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTableForGroups">
+                                            <thead>
+                                                <tr>
+                                                    <th>Selected</th>
+                                                    <th>Group Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="groupsTableBody">
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        <!-- /.table-responsive -->
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" id="submit_button" onclick="saveChanges()" value="Save changes" class="btn btn-primary btn-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+</div>
+
+{% endblock content %}
+{% block extrajs %}
+<!-- DataTables JavaScript -->
+<script src="../static/js/modal.js"></script>
+<script src="../static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="../static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+$(document).ready(function() {
+    var rows_selected = [];
+    var rows_walls = [];
+    var rows_comments = [];
+    var table = $('#groupTable').DataTable({
+            responsive: true,
+            "scrollX": true
+    });
+   $('#groupTable tbody').on('click', 'input[name="select"]', function(e){
+      var $row = $(this).closest('tr');
+      // Get row data
+      var data = table.row($row).data();
+      // Get row ID
+      var rowId = data[1];
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_selected);
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+      document.getElementsByName("total_id")[0].value = rows_selected;
+   });
+      $('#groupTable tbody').on('click', 'input[name="wall"]', function(e){
+      var $row = $(this).closest('tr');
+      // Get row data
+      var data = table.row($row).data();
+      // Get row ID
+      var rowId = data[1];
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_walls);
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index !== -1){
+         rows_walls.splice(index, 1);
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index === -1){
+         rows_walls.push(rowId);
+      }
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+      document.getElementsByName("total_walls")[0].value = rows_walls;
+   });
+      $('#groupTable tbody').on('click', 'input[name="comment"]', function(e){
+      var $row = $(this).closest('tr');
+      // Get row data
+      var data = table.row($row).data();
+      // Get row ID
+      var rowId = data[1];
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_comments);
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index !== -1){
+         rows_comments.splice(index, 1);
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index === -1){
+         rows_comments.push(rowId);
+      }
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+      document.getElementsByName("total_comments")[0].value = rows_comments;
+   });
+});
+</script>
+<script>
+    var csrftoken = '{{ csrf_token }}';
+</script>
+{% endblock extrajs %}

@@ -1,0 +1,50 @@
+{% extends "components/campaigns.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block campaings %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <form role="form" action='{% url 'dashboard:add_campaign' %}' method='POST'>
+            {% csrf_token %}
+            <div class="form-group">
+                    {{ form.name.label_tag }}
+                </br>
+                    {{ form.name }}
+            </div>
+            <div class="form-group">
+                    {{ form.description.label_tag }}
+                </br>
+                    {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label>Destination Lists:</label>
+                    {{ form.select }}
+            </div>
+            <div class="form-group">
+                    {{ form.stop_account }} Stop account activity after single error</br>
+                    {{ form.stop_publish }} do not publish the same post on mulitple accounts in parallel</br>
+                    {{ form.stop_campaign }} stop campaign after 5 errors in total</br>
+            </div>
+                <div class="pull-left">
+                    <button type="button" onclick="location.href='{% url 'dashboard:campaigns_overview' %}'" class="btn btn-primary btn-lg">BACK
+                    </button>
+                </div>
+                <div class="pull-right">
+                    <input type="submit" value="ADD CAMPAIGN" class="btn btn-primary btn-lg">
+                </div>
+        </form>
+    </div>
+</div>
+<!-- /.row -->
+    
+{% endblock campaings %}

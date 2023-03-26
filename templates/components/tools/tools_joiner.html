@@ -1,0 +1,175 @@
+{% extends "components/tools/tools_base.html" %}
+{% load static %}
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+<!-- DataTables CSS -->
+<link href="{% static "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="{% static "bower_components/datatables-responsive/css/dataTables.responsive.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+{% block content %}
+
+<div class="row">
+    <form role="form" action='{% url 'dashboard:tools_joiner' %}' method='POST'>
+        {% csrf_token %}
+        <div class="col-lg-10">
+                <label for="ulogin"><a href = "{{dst_name}}">{{dst_name}}</a> id:</label>
+                <input type="text" id="ulogin" name="dst_id" value="{{ dst_id }}" readonly="readonly">
+        </div>
+        <div class="col-lg-10">
+            <br>
+        </div>
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    RUN TIMERS
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg">
+                        <label>Wait between
+                            {{ form.wait_between }}
+                            and
+                            {{ form.wait_between_and }}
+                            seconds before each new operations
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                        <label>Execute between
+                            {{ form.execute_between }}
+                            and
+                            {{ form.execute_between_and }}
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                            <label>
+                                {{ form.random_sleep_time }}
+                                add random sleep time
+                            </label>
+                    </div>
+                    <div class="col-lg">
+                        <label>
+                            Operate on:
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.MON }}MON
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.TUE }}TUE
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.WED }}WED
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.THU }}THU
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.FRI }}FRI
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.SAT }}SAT
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form.SUN }}SUN
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    SETTINGS
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg">
+                        <label>Join between
+                            {{ form.join_between_peer_day }}
+                            and
+                            {{ form.join_between_and_peer_day }}
+                            groups per day
+                        </label>
+                    </div>
+                    <div class="col-lg">
+                        <label>
+                            {{ form.auto_stop_peer_day }}
+                            auto-stop the tool after reaching
+                            {{ form.reaching_groups_peer_day }}
+                            groups
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="pull-right">
+                <div class="col-lg-4">
+                    <input type="submit" value="CONFIRM" class="btn btn-primary btn-lg">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <br>
+        </div>
+    </form>
+    <div class="col-lg-10">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav" id="campaigns-menu">
+                        <li>
+                            <a href="{% url 'dashboard:tools_joiner_show_groups' %}?dst_id={{ dst_id }}"><i class="fa"></i> GROUPS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:tools_joiner_show_pages' %}?dst_id={{ dst_id }}"></i> PAGES</a>
+                        </li>
+                </ul>
+            </div>
+        </nav>
+     </div>
+</div>
+<!-- /.row -->
+<div id="publish-wrapper">
+    {% block publish %}
+    {% endblock publish %}
+</div>
+    <!-- /#campaigns-wrapper -->
+{% endblock content %}
+{% block extrajs %}
+{% endblock extrajs %}

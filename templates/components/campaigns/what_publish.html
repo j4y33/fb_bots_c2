@@ -1,0 +1,46 @@
+{% extends "components/campaigns.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block campaings %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav" id="campaigns-menu">
+                        <li>
+                            <a href="{% url 'dashboard:campaigns_what_publish_post' %}"><i class="fa"></i> ADD POSTS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:campaigns_what_publish_scrap_and_share_post' %}"><i class="fa"></i> SCRAPE/SHARE POSTS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:campaigns_what_publish_rss_post' %}"><i class="fa"></i> RSS POSTS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:campaigns_what_publish_monitor_folders' %}"><i class="fa"></i> MONITOR FOLDERS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard:campaigns_what_publish_comment_like' %}"><i class="fa"></i> COMMENT LIKE</a>
+                        </li>
+                </ul>
+            </div>
+        </nav>
+     </div>
+</div>
+<!-- /.row -->
+<div id="publish-wrapper">
+    {% block publish %}
+    {% endblock publish %}
+</div>
+    <!-- /#campaigns-wrapper -->
+{% endblock campaings %}

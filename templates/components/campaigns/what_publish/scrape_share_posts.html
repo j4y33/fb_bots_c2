@@ -1,0 +1,116 @@
+{% extends "components/campaigns/what_publish.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+<!-- DataTables CSS -->
+<link href="{% static "bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" %}" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="{% static "bower_components/datatables-responsive/css/dataTables.responsive.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+    <form role="form" enctype="multipart/form-data" action='{% url 'dashboard:campaigns_what_publish_scrap_and_share_post' %}' method='POST'>
+          {% csrf_token %}
+    <div class="col-lg-10">
+        <div class="col-lg-4">
+            <div class="form-group">
+                 {{ campaign.select }}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-lg-10">
+        <div class="col-lg-4">
+            <div class="form-group">
+                {{ campaign.process_name.label }}
+                <br>
+                {{ campaign.process_name }}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="col-lg-4">
+                        <label style="text-decoration: underline;">URL</label>
+                            {{ campaign.url }}
+                    </div>
+                    <div class="col-lg-4">
+                        <label style="text-decoration: underline;">Filters</label>
+                            <div class="form-group">
+                                <label>Keywords:</label>
+                                {{ campaign.keywords }}
+                                <label>exclude keywords:</label>
+                                {{ campaign.exclude_keywords }}
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <label style="text-decoration: underline;">Settings</label>
+                            <div class="form-group">
+                                {{ campaign.ignore_items_without_images }}  <label> ignore items without images</label>
+                                <br>
+                            </div>
+                        <label>{{ campaign.maximum_posts }}
+                        share maximum posts per login</label>
+                    </div>
+                </div>
+                 <div class="col-lg-12">
+                     <div class="form-group">
+                    </br></br>
+                        {{ campaign.post_text.label_tag }}
+                    </br>
+                        {{ campaign.post_text }}
+                     </br>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <label for="campaign-content-upload">Upload CSV <span class="fa fa-file-text"></span> :</label>
+                <input id="campaign-content-upload" type="file" name="content" />
+            </div>
+        </div>
+        <!-- /.panel -->
+    </div>
+        <div class="col-lg-10">
+             <input type="submit" name="update" value="UPDATE" class="btn btn-primary btn-lg"><br/>
+        </div>
+    </form>
+
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}
+{% block extrajs %}
+<!-- DataTables JavaScript -->
+<script src="../../../static/js/modal_posts.js"></script>
+<script src="../../../static/js/modal_screen_posts.js"></script>
+<script src="../../../static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="../../../static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script>
+    var csrftoken = '{{ csrf_token }}';
+</script>
+<script>
+$(document).ready(function() {
+    $('#dataTablePosts').DataTable({
+            responsive: true
+    });
+});
+</script>
+{% endblock extrajs %}

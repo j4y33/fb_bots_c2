@@ -1,0 +1,53 @@
+{% extends "components/tools/tools_finder.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="col-lg">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">only groups with minimum
+                    <input type="number" id="points" name="publish_accounts_num" value="10" step="1"> users
+                </label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">only english | german groups
+                </label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">only groups that are open
+                </label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">only groups that do not require admin privileges to post</br>
+                </label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <button type="button" onclick="location.href='{% url 'dashboard:index' %}'" class="btn btn-primary btn-lg">APPLY</button>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}

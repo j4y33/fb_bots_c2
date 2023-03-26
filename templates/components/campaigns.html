@@ -1,0 +1,52 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+{% block content %}
+<div id="comp-wrapper">
+    <div class="row">
+        <!-- Navigation -->
+        <div class="col-lg-10">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav" id="campaigns-menu">
+                            <li>
+                                <a href="{% url 'dashboard:campaigns_overview' %}"><i class="fa"></i> OVERVIEW</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:campaigns_what_publish' %}"><i class="fa"></i> WHAT TO PUBLISH</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:campaigns_where_publish' %}"><i class="fa"></i> WHERE TO PUBLISH</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:campaigns_when_publish' %}"><i class="fa"></i> WHEN TO PUBLISH</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:campaigns_post_list' %}"><i class="fa"></i> POST LIST</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:campaigns_history' %}"><i class="fa"></i> HISTORY</a>
+                            </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Campaigns Content -->
+    <div id="campaigns-wrapper">
+        {% block campaings %}
+
+        {% endblock campaings %}
+    </div>
+    <!-- /#campaigns-wrapper -->
+</div>
+{% endblock content %}

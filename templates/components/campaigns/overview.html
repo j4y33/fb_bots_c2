@@ -1,0 +1,63 @@
+{% extends "components/campaigns.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block campaings %}
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="pull-right">
+            <button type="button" onclick="location.href='{% url 'dashboard:add_campaign' %}'" class="btn btn-primary btn-lg">ADD NEW CAMPAIGN</button>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <br>
+    </div>
+    <div class="col-lg-9">
+        {% for value in campaign %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ value.campaign_name }}
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                {% if value.errors %}
+                        <div class="alert alert-danger">
+                            Campaign error:
+                            <a href="{% url 'dashboard:campaigns_history' %}" class="alert-link">See Errors</a>
+                        </div>
+                {% endif %}
+                {% if not value.dst_lists %}
+                    <div class="alert alert-warning">
+                        Please select at least one destination list
+                        <a href="{% url 'dashboard:campaigns_where_publish' %}" class="alert-link">select</a>
+                    </div>
+                {% endif %}
+                {% if not value.posts %}
+                    <div class="alert alert-warning">
+                        Your campaign has no content (What to publish)
+                        <a href="{% url 'dashboard:campaigns_what_publish' %}" class="alert-link">add</a>
+                    </div>
+                {% endif %}
+                {% if value.posts_done %}
+                    <div class="alert alert-success">
+                        The campaign posts on 5 groups, 6 pages with a total of 12 accounts
+                        <a href="#" class="alert-link">View details</a>.
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+    
+{% endblock campaings %}

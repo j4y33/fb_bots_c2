@@ -1,0 +1,50 @@
+{% extends "components/campaigns/what_publish.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block publish %}
+
+<div class="row">
+    <form action='{% url 'dashboard:campaigns_what_publish_monitor_folders' %}' method='POST'>
+          {% csrf_token %}
+    <div class="col-lg-10">
+        <div class="col-lg-4">
+            <div class="form-group">
+                 {{ campaign.select }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="col-lg">
+                        <label style="text-decoration: underline;">Folders</label>
+                            {{ campaign.url_text_area }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <label>{{ campaign.add_post_as_pending }} add post as "pending"</label>
+        <label>{{ campaign.add_post_as_publishing }} add post as "publishing"</label>
+    </div>
+    <div class="col-lg-10">
+        <div class="pull-right">
+            <input type="submit" name="add" value="ADD TO POST LIST" class="btn btn-primary btn-lg">
+        </div>
+    </div>
+    </form>
+</div>
+<!-- /.row -->
+    
+{% endblock publish %}

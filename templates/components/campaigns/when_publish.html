@@ -1,0 +1,89 @@
+{% extends "components/campaigns.html" %}
+{% load static %}
+
+
+{% block extrahead %}
+
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+
+{% endblock extrahead %}
+
+
+{% block campaings %}
+
+<div class="row">
+    <form role="form" action='{% url 'dashboard:campaigns_when_publish' %}' method='POST'>
+     {% csrf_token %}
+    <div class="col-lg-10">
+        <div class="pull-right">
+            <input type="submit" name="confirm" value="CONFIRM" class="btn btn-primary btn-lg">
+        </div>
+        <div class="form-group">
+             {{ campaign.select }}
+        </div>
+        </br>
+    </div>
+    <div class="col-lg-10">
+        <div class="col-lg">
+            <label>This campaigns will publish
+                {{ campaign.post_per_day }}
+                post per day between the interval of
+                {{ campaign.publish_time_start }}
+                and
+                {{ campaign.publish_time_end }}
+            </label>
+        </div>
+        <div class="col-lg">
+            {{ campaign.randomise_interval_each_day }} randomise interval each day
+        </div>
+        <div class="col-lg">
+            {{ campaign.randomise_number_of_posts }} randomise number of posts, with a maximum of
+            {{ campaign.randomise_number_of_posts_maximum }} posts
+        </div>
+        <div class="col-lg">
+            {{ campaign.wait }} wait
+            {{ campaign.wait_seconds }} seconds before publishing the same Post List Item on a new destination with the
+same account
+        </div>
+        <div class="col-lg">
+            {{ campaign.rotate_weekdays_randomly }} rotate weekdays randomly
+        </div>
+        <div class="col-lg-10">
+            <label> Operate on:</label>
+        </div>
+        <div class="col-lg-10">
+            <div class="col-lg-1">
+                <label>MON</label>
+                {{ campaign.MON }}
+            </div>
+            <div class="col-lg-1">
+                <label>TUE</label>
+                {{ campaign.TUE }}
+            </div>
+            <div class="col-lg-1">
+                <label>WED</label>
+                {{ campaign.WED }}
+            </div>
+            <div class="col-lg-1">
+                <label>THU</label>
+                {{ campaign.THU }}
+            </div>
+            <div class="col-lg-1">
+                <label>FRI</label>
+                {{ campaign.FRI }}
+            </div>
+            <div class="col-lg-1">
+                <label>SAT</label>
+                {{ campaign.SAT }}
+            </div>
+            <div class="col-lg-1">
+                <label>SUN</label>
+                {{ campaign.SUN }}
+            </div>
+        </div>
+    </div>
+<!-- /.row -->
+    </form>
+</div>
+{% endblock campaings %}

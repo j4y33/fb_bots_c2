@@ -1,0 +1,401 @@
+{% extends "components/tools/tools_base.html" %}
+{% load static %}
+{% block extrahead %}
+<!-- Social Buttons CSS -->
+<link href="{% static "bower_components/bootstrap-social/bootstrap-social.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+{% block content %}
+<div class="row">
+    <form role="form" action='{% url 'dashboard:tools_account_action' %}' method='POST'>
+        {% csrf_token %}
+        <div class="col-lg-10">
+                <label for="ulogin"><a href = "{{dst_name}}">{{dst_name}}</a> id:</label>
+                <input type="text" id="ulogin" name="dst_id" value="{{ dst_id }}" readonly="readonly">
+        </div>
+        <div class="col-lg-10">
+            <div class="pull-right">
+                <div class="col-lg-4">
+                    <input type="submit" value="UPDATE" class="btn btn-primary btn-lg">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <br>
+        </div>
+        <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                SESSION SETTINGS
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Use session settings
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>{{ form.use_session_settings }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Long session time range
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.long_session_time_min }} max: {{ form.long_session_time_max }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Medium session time range
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.medium_session_time_min }} max: {{ form.medium_session_time_max }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Short session time range
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.short_session_time_min }} max: {{ form.short_session_time_max }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                ENGAGEMENT LEVELS
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Use engagement levels
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>{{ form.use_engagement_levels }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Strong level
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.strong_time_min }} max: {{ form.strong_time_max }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Moderate level
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.moderate_time_min }} max: {{ form.moderate_time_max }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Weak level
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.weak_time_min }} max: {{ form.weak_time_max }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                ACTION PRIORITIES
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>High percent
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label> {{ form.high_percent }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Middle percent
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label> {{ form.middle_percent }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Low percent
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label> {{ form.low_percent }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                DELAYS
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Short wait range
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.short_time_min }} max: {{ form.short_time_max }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Medium wait range
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.medium_time_min }} max: {{ form.medium_time_max }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="col-lg-5">
+                        <label>Long wait range
+                        </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <label>min: {{ form.long_time_min }} max: {{ form.long_time_max }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                RUN TIMERS
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                <div class="col-lg">
+                    <label>Wait between
+                        {{ form.wait_between }}
+                        and
+                        {{ form.wait_between_and }}
+                        seconds before each new operations
+                    </label>
+                </div>
+                <div class="col-lg">
+                    <label>Execute between
+                        {{ form.execute_between }}
+                        and
+                        {{ form.execute_between_and }}
+                    </label>
+                </div>
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>
+                            {{ form.random_sleep_time }}add random sleep time
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>
+                            {{ form.rotate_weekdays_randomly }}rotate weekdays randomly
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>
+                            Operate on:
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.MON }}MON
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.TUE }}TUE
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.WED }}WED
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.THU }}THU
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.FRI }}FRI
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.SAT }}SAT
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="checkbox">
+                            <label>
+                                {{ form.SUN }}SUN
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                ACCEPT FRIENDS
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                <div class="col-lg">
+                    <label>Accept only
+                        {{ form.accept_per_login }}
+                        per login
+                    </label>
+                </div>
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>
+                            {{ form.auto_accept_friends }}auto-accept friends
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                LIKE POSTS
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>
+                            {{ form.auto_like_news_feed_posts }}
+                            auto-like
+                            {{ form.auto_like_news_feed_posts_num }}
+                            random posts from newsfeed
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>
+                            {{ form.auto_like_news_feed_posts_keywords }}
+                            auto-like
+                            {{ form.auto_like_news_feed_posts_keywords_num }}
+                            posts with keywords:
+                            {{ form.keywords }}
+                            exclude:
+                            {{ form.exclude_keywords }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="checkbox">
+                        <label>Like between
+                            {{ form.like_between_post_per_login }}
+                            and
+                            {{ form.like_between_post_per_login_and }}
+                            posts be login
+                        </label>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+        <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                EXTRA
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-10">
+                    <div class="checkbox">
+                        <label>
+                            {{ form.read_notifications_and_messages }}
+                            read notifications and messages
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+<!-- /.row -->
+<div id="publish-wrapper">
+    {% block publish %}
+    {% endblock publish %}
+</div>
+{% endblock content %}
